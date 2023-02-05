@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #canvas {
+      border: 1px solid black;
+      /* height: 100vh; 
+      width: 100vw;  */
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    canvas.width = document.documentElement.clientWidth - 20;
+    canvas.height = document.documentElement.clientHeight - 20;
+    const ctx = canvas.getContext('2d');
+    let dots = [];
+    const dotCount = 200;
+    const dotRadius = 5;
+    const range = 100;
+
+    for (let i = 0; i < dotCount; i++) {
+      dots.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: Math.random() * 10 - 5,
+        vy: Math.random() * 10 - 5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < dotCount; i++) {
+        let dot1 = dots[i];
+        ctx.beginPath();
+        ctx.arc(dot1.x, dot1.y, dotRadius, 0, 2 * Math.PI);
+        ctx.fill();
+
+        dot1.x += dot1.vx;
+        dot1.y += dot1.vy;
+
+        if (dot1.x + dotRadius >= canvas.width || dot1.x - dotRadius <= 0) {
+          dot1.vx = -dot1.vx;
+        }
+
+        if (dot1.y + dotRadius >= canvas.height || dot1.y - dotRadius <= 0) {
+          dot1.vy = -dot1.vy;
+        }
+
+        for (let j = 0; j < dotCount; j++) {
+          if (i === j) continue;
+          let dot2 = dots[j];
+          let distance = Math.sqrt(Math.pow(dot1.x - dot2.x, 2) + Math.pow(dot1.y - dot2.y, 2));
+          if (distance < range) {
+            ctx.beginPath();
+            ctx.moveTo(dot1.x, dot1.y);
+            ctx.lineTo(dot2.x, dot2.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>

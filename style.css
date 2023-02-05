@@ -1,0 +1,47 @@
+.container {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  border: 1px solid black;
+}
+
+.node {
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.line {
+  width: 2px;
+  height: 1px;
+  background-color: blue;
+  position: absolute;
+  top: 0;
+  left: calc(50% - 1px);
+  z-index: 0;
+}
+
+/* Add the following code to randomize the position of the nodes */
+#node1 {
+  top: calc(20% - 5px);
+  left: calc(30% - 5px);
+}
+
+#node2 {
+  top: calc(60% - 5px);
+  left: calc(70% - 5px);
+}
+
+#node3 {
+  top: calc(40% - 5px);
+  left: calc(50% - 5px);
+}
+
+#node4 {
+  top: calc(80% - 5px);
+  left: calc(20% - 5px);
+}
+

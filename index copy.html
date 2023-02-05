@@ -1,0 +1,84 @@
+<html>
+
+<head>
+  <style>
+    #container {
+      width: 100%;
+      height: 100%;
+      /* border: 1px solid black; */
+      position: relative;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: blue;
+      position: absolute;
+    }
+/* 
+    .line {
+      width: 1px;
+      height: 1px;
+      background-color: black;
+      position: absolute;
+      transform: rotate(-90deg);
+      transform-origin: left top;
+    } */
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <script>
+    const container = document.getElementById("container");
+    const dots = [];
+    let dotCount = Math.floor(Math.random() * 500) + 50;
+    console.log('dotCount >> ',dotCount)
+    const lines = [];
+    let lineCount = dotCount;
+
+    for (let i = 0; i < dotCount; i++) {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      dot.style.left = Math.random() * screen.width + "px";
+      dot.style.top = Math.random() * screen.height + "px";
+      dots.push(dot);
+      container.appendChild(dot);
+    }
+
+    // for (let i = 0; i < lineCount; i++) {
+    //   const line = document.createElement("div");
+    //   line.classList.add("line");
+    //   lines.push(line);
+    //   container.appendChild(line);
+    // }
+
+    function animate() {
+      for (let i = 0; i < dotCount; i++) {
+        dots[i].style.left = parseInt(dots[i].style.left) + (Math.random() - 0.5) + "px";
+        dots[i].style.top = parseInt(dots[i].style.top) + (Math.random() - 0.5) + "px";
+      }
+
+      // for (let i = 0; i < lineCount; i++) {
+      //   const dot1 = dots[i];
+      //   const dot2 = dots[(i + 1) % dotCount];
+      //   const x1 = parseInt(dot1.style.left) + 5;
+      //   const y1 = parseInt(dot1.style.top) + 5;
+      //   const x2 = parseInt(dot2.style.left) + 5;
+      //   const y2 = parseInt(dot2.style.top) + 5;
+      //   const length = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+      //   lines[i].style.width = length + "px";
+      //   lines[i].style.left = x1 + "px";
+      //   lines[i].style.top = y1 + "px";
+      // }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+
+</html>
